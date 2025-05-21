@@ -3,3 +3,4 @@
 - This repo is loaded with pre-commit hooks to ensure code quality. Please refer to the `.pre-commit-config.yaml` file for more information.
 - `uv` is used as a package manager. You need to append `uv run` in front of your commands to execute them such as `uv run dbt parse` to parse the models.
 - Run `uv run sqlfmt models/` to make sure all SQL and YML files are formatted correctly before committing.
+- `uv` creates a local virtual environment under `.venv`. Avoid it when searching for files.
