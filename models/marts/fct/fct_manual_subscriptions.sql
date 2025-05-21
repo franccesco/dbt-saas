@@ -3,12 +3,12 @@ select
     subscription_external_id,
     customer_external_id as customer_id,
     plan_external_id as plan_id,
-    date as event_date,
-    effective_date,
     event_type,
     currency,
     amount_in_cents,
     quantity,
+    effective_date - date as days_until_effective,
     report_cash_flow,
-    effective_date - date as days_until_effective
+    date as event_date,
+    effective_date
 from {{ ref("stg_manual_subscriptions") }}

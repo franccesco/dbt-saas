@@ -19,12 +19,12 @@ models:
         description: City for the company headquarters.
       - name: zip
         description: Zip or postal code.
+      - name: days_to_free_trial
+        description: Days between lead creation and start of free trial.
       - name: lead_created_at
         description: Date the lead was created.
       - name: free_trial_started_at
         description: Date the free trial started.
-      - name: days_to_free_trial
-        description: Days between lead creation and start of free trial.
 
   - name: dim_plans
     description: Dimension table for subscription plans.
@@ -36,12 +36,12 @@ models:
           - unique
       - name: plan_name
         description: Plan display name.
-      - name: interval_count
-        description: Number of interval units between renewals.
       - name: interval_unit
         description: Unit for the renewal interval.
       - name: plan_interval
         description: Concatenated interval count and unit.
+      - name: interval_count
+        description: Number of interval units between renewals.
 
   - name: fct_invoices
     description: Fact table summarizing invoice information and totals.
@@ -58,10 +58,6 @@ models:
           - relationships:
               to: ref('dim_customers')
               field: customer_id
-      - name: invoiced_date
-        description: Date the invoice was issued.
-      - name: due_date
-        description: Date the invoice is due.
       - name: currency
         description: Currency code for monetary amounts.
       - name: line_item_count
@@ -78,6 +74,10 @@ models:
         description: Number of successful transactions for the invoice.
       - name: days_until_due
         description: Difference between due_date and invoiced_date.
+      - name: invoiced_date
+        description: Date the invoice was issued.
+      - name: due_date
+        description: Date the invoice is due.
 
   - name: fct_invoice_line_items
     description: Fact table of invoice line items with net amount calculation.
@@ -95,44 +95,44 @@ models:
         description: Identifier for the subscription associated with the line item.
       - name: subscription_set_external_id
         description: Identifier for the subscription set if provided.
-      - name: type
-        description: Type of line item such as Subscription or OneTime.
-      - name: amount_in_cents
-        description: Amount of the line item in cents.
       - name: plan_id
         description: Plan associated with the line item.
-      - name: service_period_start
-        description: Start date of the service period.
-      - name: service_period_end
-        description: End date of the service period.
-      - name: quantity
-        description: Quantity billed on the line item.
-      - name: proration
-        description: Whether the line item is prorated.
+      - name: type
+        description: Type of line item such as Subscription or OneTime.
       - name: discount_code
         description: Discount code applied to the line item.
-      - name: discount_amount
-        description: Discount amount applied in cents.
-      - name: tax_amount
-        description: Tax amount applied in cents.
       - name: description
         description: Description of the line item.
-      - name: transaction_fee
-        description: Associated transaction fee in cents.
       - name: account_code
         description: Account code for accounting integrations.
       - name: transaction_fees_currency
         description: Currency for transaction fees if different.
       - name: discount_description
         description: Description for any discount applied.
-      - name: event_order
-        description: Order of the event in the billing process.
-      - name: balance_transfer
-        description: Flag for balance transfers.
       - name: proration_type
         description: Type of proration applied.
+      - name: amount_in_cents
+        description: Amount of the line item in cents.
+      - name: quantity
+        description: Quantity billed on the line item.
+      - name: discount_amount
+        description: Discount amount applied in cents.
+      - name: tax_amount
+        description: Tax amount applied in cents.
+      - name: transaction_fee
+        description: Associated transaction fee in cents.
+      - name: event_order
+        description: Order of the event in the billing process.
       - name: net_amount_in_cents
         description: Net amount after discounts and taxes.
+      - name: proration
+        description: Whether the line item is prorated.
+      - name: balance_transfer
+        description: Flag for balance transfers.
+      - name: service_period_start
+        description: Start date of the service period.
+      - name: service_period_end
+        description: End date of the service period.
 
   - name: fct_manual_subscriptions
     description: Manual subscription events.
@@ -156,10 +156,6 @@ models:
           - relationships:
               to: ref('dim_plans')
               field: plan_id
-      - name: event_date
-        description: Date the event was recorded.
-      - name: effective_date
-        description: Date the event takes effect.
       - name: event_type
         description: Type of manual subscription event.
       - name: currency
@@ -168,10 +164,14 @@ models:
         description: Amount related to the event in cents.
       - name: quantity
         description: Quantity associated with the event.
-      - name: report_cash_flow
-        description: Whether to report cash flow for the event.
       - name: days_until_effective
         description: Difference between effective_date and event_date.
+      - name: report_cash_flow
+        description: Whether to report cash flow for the event.
+      - name: event_date
+        description: Date the event was recorded.
+      - name: effective_date
+        description: Date the event takes effect.
 
   - name: fct_subscription_events
     description: Subscription events.
@@ -189,20 +189,16 @@ models:
               field: customer_id
       - name: subscription_external_id
         description: Identifier for the subscription affected.
-      - name: event_type
-        description: Type of subscription event.
       - name: retracted_event_id
         description: Identifier of a retracted event, if any.
-      - name: event_date
-        description: Date the event occurred.
-      - name: effective_date
-        description: Date the event takes effect.
       - name: plan_id
         description: Plan associated with the subscription event.
         tests:
           - relationships:
               to: ref('dim_plans')
               field: plan_id
+      - name: event_type
+        description: Type of subscription event.
       - name: currency
         description: Currency code for the event.
       - name: amount_in_cents
@@ -211,6 +207,10 @@ models:
         description: Quantity involved in the event.
       - name: days_until_effective
         description: Difference between effective_date and event_date.
+      - name: event_date
+        description: Date the event occurred.
+      - name: effective_date
+        description: Date the event takes effect.
 
   - name: fct_transactions
     description: Transactions for invoices.
@@ -231,8 +231,8 @@ models:
         description: Type of transaction such as payment or refund.
       - name: transaction_result
         description: Result of the transaction.
-      - name: transaction_date
-        description: Date the transaction occurred.
       - name: was_successful
         description: Boolean flag for successful transactions.
+      - name: transaction_date
+        description: Date the transaction occurred.
 

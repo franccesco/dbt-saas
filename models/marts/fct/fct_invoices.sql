@@ -23,8 +23,6 @@ with
 select
     i.invoice_external_id as invoice_id,
     i.customer_external_id as customer_id,
-    i.invoiced_date,
-    i.due_date,
     i.currency,
     li.line_item_count,
     li.total_amount_in_cents,
@@ -32,7 +30,9 @@ select
     li.total_tax_in_cents,
     tr.total_transactions,
     tr.successful_transactions,
-    null as days_until_due
+    null as days_until_due,
+    i.invoiced_date,
+    i.due_date
 from invoices i
 left join line_items li on i.invoice_external_id = li.invoice_external_id
 left join transactions tr on i.invoice_external_id = tr.invoice_external_id
