@@ -28,7 +28,11 @@ The project relies on the [`dbt_constraints`](https://github.com/Snowflake-Labs/
 
 3. **Database connection**
 
-   By default the project uses a local PostgreSQL instance as configured in `profiles.yml`. A devcontainer is provided for a ready‑to‑use environment with both Python and Postgres.
+   By default the project uses a local PostgreSQL instance as configured in `profiles.yml`.
+   The `.devcontainer/` folder contains everything needed to run this project in
+   VS Code or any editor that supports dev containers. Opening the repository in
+   a dev container automatically starts a PostgreSQL service alongside Python so
+   you can run dbt commands without additional setup.
 
 ## Running dbt
 
@@ -52,4 +56,3 @@ uv run sqlfmt models/
 - Document columns and add tests in the corresponding YAML files.
 - Keep SQL style consistent by running `uv run sqlfmt models/` before committing.
 - Ensure models run successfully with `uv run dbt build` and update any documentation when changes are made.
-
