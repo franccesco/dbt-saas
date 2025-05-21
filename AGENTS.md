@@ -2,4 +2,4 @@
 - Models such as staging and marts are stored in the `models` directory.
 - This repo is loaded with pre-commit hooks to ensure code quality. Please refer to the `.pre-commit-config.yaml` file for more information.
 - `uv` is used as a package manager. You need to append `uv run` in front of your commands to execute them such as `uv run dbt run`.
-- Run `uv run sqlfmt .` to make sure all SQL files are formatted correctly before committing.
+- Run `uv run sqlfmt models/` to make sure all SQL and YML files are formatted correctly before committing.
