@@ -3,6 +3,13 @@ version: 2
 models:
   - name: stg_contacts
     description: Staged contact data from source
+    constraints:
+      - type: not_null
+        columns: [customer_external_id]
+      - type: foreign_key
+        columns: [customer_external_id]
+        to: ref('stg_customers')
+        to_columns: [customer_external_id]
     columns:
       - name: customer_external_id
         description: Foreign key to customers
@@ -14,6 +21,9 @@ models:
 
   - name: stg_customers
     description: Staged customer data from source
+    constraints:
+      - type: primary_key
+        columns: [customer_external_id]
     columns:
       - name: customer_external_id
         description: Primary key for customers
@@ -23,6 +33,13 @@ models:
 
   - name: stg_invoice_line_items
     description: Staged invoice line items from source
+    constraints:
+      - type: not_null
+        columns: [invoice_external_id]
+      - type: foreign_key
+        columns: [invoice_external_id]
+        to: ref('stg_invoices')
+        to_columns: [invoice_external_id]
     columns:
       - name: invoice_external_id
         description: Foreign key to invoices
@@ -34,6 +51,13 @@ models:
 
   - name: stg_invoices
     description: Staged invoice data from source
+    constraints:
+      - type: primary_key
+        columns: [invoice_external_id]
+      - type: foreign_key
+        columns: [customer_external_id]
+        to: ref('stg_customers')
+        to_columns: [customer_external_id]
     columns:
       - name: invoice_external_id
         description: Primary key for invoices
@@ -50,6 +74,21 @@ models:
 
   - name: stg_manual_subscriptions
     description: Staged manual subscription events from source
+    constraints:
+      - type: primary_key
+        columns: [external_id]
+      - type: not_null
+        columns: [customer_external_id]
+      - type: foreign_key
+        columns: [customer_external_id]
+        to: ref('stg_customers')
+        to_columns: [customer_external_id]
+      - type: not_null
+        columns: [plan_external_id]
+      - type: foreign_key
+        columns: [plan_external_id]
+        to: ref('stg_plans')
+        to_columns: [plan_external_id]
     columns:
       - name: external_id
         description: Primary key for manual subscription events
@@ -72,6 +111,9 @@ models:
 
   - name: stg_plans
     description: Staged subscription plans from source
+    constraints:
+      - type: primary_key
+        columns: [plan_external_id]
     columns:
       - name: plan_external_id
         description: Primary key for plans
@@ -81,6 +123,21 @@ models:
 
   - name: stg_subscription_events
     description: Staged subscription events from source
+    constraints:
+      - type: primary_key
+        columns: [external_id]
+      - type: not_null
+        columns: [customer_external_id]
+      - type: foreign_key
+        columns: [customer_external_id]
+        to: ref('stg_customers')
+        to_columns: [customer_external_id]
+      - type: not_null
+        columns: [plan_external_id]
+      - type: foreign_key
+        columns: [plan_external_id]
+        to: ref('stg_plans')
+        to_columns: [plan_external_id]
     columns:
       - name: external_id
         description: Primary key for subscription events
@@ -103,6 +160,15 @@ models:
 
   - name: stg_transactions
     description: Staged transaction data from source
+    constraints:
+      - type: primary_key
+        columns: [transaction_external_id]
+      - type: not_null
+        columns: [invoice_external_id]
+      - type: foreign_key
+        columns: [invoice_external_id]
+        to: ref('stg_invoices')
+        to_columns: [invoice_external_id]
     columns:
       - name: transaction_external_id
         description: Primary key for transactions
