@@ -16,7 +16,14 @@
 	// This can be used to network with other containers or the host.
 	"forwardPorts": [
 		5432
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mechatroner.rainbow-csv"
+			]
+		}
+	}
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip install --user -r requirements.txt",
 	// Configure tool-specific properties.
