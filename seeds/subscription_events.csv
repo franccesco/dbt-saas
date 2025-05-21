@@ -1,0 +1,25 @@
+Customer external ID,Subscription external ID,External ID,Event Type,Retracted event ID,Date,Effective Date,Plan external ID,Currency,Amount in Cents,Quantity
+scus_001,sub_0001b,evnt_001,subscription_start,,2025-03-15,2025-03-15,gold_biannual,USD,150000,1
+scus_002,sub_0002,evnt_002,subscription_start_scheduled,,2025-04-28,2025-05-16,gold_monthly,USD,10000,1
+scus_002,sub_0002,evnt_003,subscription_event_retracted,evnt_002,2025-04-29,2025-05-16,gold_monthly,USD,10000,1
+scus_003,sub_0003,evnt_004,subscription_start_scheduled,,2025-04-11,2025-04-16,gold_quarterly,USD,1500,1
+scus_003,sub_0003,evnt_005,subscription_start,,2025-04-16,2025-04-16,gold_quarterly,USD,1500,1
+scus_003,sub_0003,evnt_006,subscription_update_scheduled,,2025-04-17,2025-04-21,gold_quarterly,USD,3000,2
+scus_003,sub_0003,evnt_007,subscription_event_retracted,,2025-04-20,2025-04-21,gold_quarterly,USD,3000,2
+scus_004,sub_0004,evnt_008,subscription_update_scheduled,,2025-04-16,2025-04-21,platinum_monthly,USD,2100,3
+scus_004,sub_0004,evnt_009,subscription_updated,,2025-04-21,2025-04-21,platinum_monthly,USD,2100,3
+scus_004,sub_0004,evnt_010,subscription_update_scheduled,,2025-04-26,2025-04-27,gold_monthly,USD,1500,3
+scus_004,sub_0004,evnt_011,subscription_updated,,2025-04-27,2025-04-27,gold_monthly,USD,1500,3
+scus_004,sub_0004,evnt_012,subscription_update_scheduled,,2025-05-01,2025-06-05,platinum_monthly,USD,2100,3
+scus_005,sub_0005,evnt_013,subscription_start,,2024-07-19,2024-07-19,platinum_annual,USD,4200,1
+scus_005,sub_0005,evnt_014,subscription_cancellation_scheduled,,2025-04-01,2025-04-16,,,,
+scus_005,sub_0005,evnt_015,subscription_event_retracted,evnt_014,2025-04-15,2025-04-15,,,,
+scus_005,sub_0005,evnt_016,subscription_cancellation_scheduled,,2025-04-16,2025-04-26,,,,
+scus_005,sub_0005,evnt_017,subscription_cancelled,,2025-04-26,2025-04-26,,,,
+scus_005,sub_0005,evnt_018,subscription_start_scheduled,,2025-04-27,2025-06-01,platinum_monthly,USD,700,1
+scus_006,sub_0006,evnt_019,subscription_cancellation_scheduled,,2025-04-01,2025-04-16,,,,
+scus_006,sub_0006,evnt_020,subscription_event_retracted,evnt_019,2025-04-02,2025-04-02,,,,
+scus_006,sub_0006,evnt_021,subscription_cancellation_scheduled,,2025-04-04,2025-05-28,,,,
+scus_006,sub_0006,evnt_022,subscription_cancelled,,2025-04-16,2025-05-28,,,,
+scus_009,sub_0009b,evnt_023,subscription_start_scheduled,,2025-04-26,2025-05-26,platinum_annual,USD,8000,1
+scus_009,sub_0009,evnt_024,subscription_cancellation_scheduled,,2025-04-26,2025-05-26,platinum_monthly,USD,700,1

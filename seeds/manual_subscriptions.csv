@@ -1,0 +1,21 @@
+External ID,Subscription external ID,Customer external ID,Plan external ID,Date,Effective Date,Event Type,Currency,Amount in Cents,Quantity,Report Cash Flow
+mevnt_001,sub_0001,scus_001,gold_monthly,2024-05-04,2024-05-04,manual_subscription_started,USD,500,1,TRUE
+mevnt_001a,sub_0001,scus_001,gold_monthly,2024-06-04,2024-06-04,manual_subscription_updated,USD,1000,2,TRUE
+mevnt_001b,sub_0001,scus_001,gold_monthly,2024-07-05,2024-07-05,manual_subscription_updated,USD,1500,3,TRUE
+mevnt_001c,sub_0001,scus_001,gold_monthly,2024-08-04,2024-08-04,manual_subscription_updated,USD,500,1,TRUE
+mevnt_001d,sub_0001,scus_001,gold_monthly,2024-10-04,2024-10-04,manual_subscription_updated,USD,2000,4,TRUE
+mevnt_001e,sub_0001,scus_001,gold_monthly,2024-11-04,2024-11-04,manual_subscription_updated,USD,1000,2,TRUE
+mevnt_001f,sub_0001,scus_001,gold_monthly,2024-12-05,2024-12-05,manual_subscription_updated,USD,500,1,TRUE
+mevnt_001g,sub_0001,scus_001,gold_monthly,2025-04-05,2025-04-05,manual_subscription_updated,USD,1000,2,TRUE
+mevnt_001h,sub_0001a,scus_001,platinum_monthly,2025-02-03,2025-02-03,manual_subscription_updated,USD,350,1,TRUE
+mevnt_001i,sub_0001,scus_001,,2025-04-21,2025-04-21,manual_subscription_cancelled,,,,TRUE
+mevnt_001j,sub_0001a,scus_001,,2025-04-21,2025-04-21,manual_subscription_cancelled,,,,TRUE
+mvent_002,sub_0002,scus_002,platinum_monthly,2025-02-17,2025-02-17,manual_subscription_started,EUR,35000,1,TRUE
+mvent_002a,sub_0002,scus_002,,2025-04-18,2025-04-18,manual_subscription_cancelled,,,,TRUE
+mevnt_003,sub_0003,scus_003,gold_quarterly,2024-06-14,2024-06-14,manual_subscription_started,USD,1500,1,TRUE
+mevnt_003a,sub_0003,scus_003,gold_quarterly,2024-09-14,2024-09-14,manual_subscription_updated,USD,3000,2,TRUE
+mevnt_003b,sub_0003,scus_003,gold_quarterly,2024-12-15,2024-12-15,manual_subscription_updated,USD,1500,1,TRUE
+mevnt_003c,sub_0003,scus_003,,2025-05-11,2025-05-11,manual_subscription_cancelled,,,,TRUE
+mvent_004,sub_0004,scus_004,platinum_annual,2024-07-13,2024-07-13,manual_subscription_started,USD,840000,1,TRUE
+mevnt_005,sub_0005,scus_005,platinum_annual,2024-07-19,2024-07-19,manual_subscription_started,USD,4200,1,TRUE
+mevnt_005a,sub_0005,scus_005,,2025-04-26,2025-04-26,manual_subscription_cancelled,,,,TRUE
