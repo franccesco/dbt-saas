@@ -1,5 +1,5 @@
 - Seeds are stored in the `seeds` directory which are then used to create the tables in the `public` schema. You understand the relationship between the seeds by looking at the `seeds-erd.md` file.
 - Models such as staging and marts are stored in the `models` directory.
 - This repo is loaded with pre-commit hooks to ensure code quality. Please refer to the `.pre-commit-config.yaml` file for more information.
-- `uv` is used as a package manager. You need to append `uv run` in front of your commands to execute them such as `uv run dbt run`.
+- `uv` is used as a package manager. You need to append `uv run` in front of your commands to execute them such as `uv run dbt parse` to parse the models.
 - Run `uv run sqlfmt models/` to make sure all SQL and YML files are formatted correctly before committing.
