@@ -1,4 +1,4 @@
-External ID,Subscription external ID,Customer external ID,Plan external ID,Date,Effective Date,Event Type,Currency,Amount in Cents,Quantity,Report Cash Flow
+external_id,subscription_external_id,customer_external_id,plan_external_id,date,effective_date,event_type,currency,amount_in_cents,quantity,report_cash_flow
 mevnt_001,sub_0001,scus_001,gold_monthly,2024-05-04,2024-05-04,manual_subscription_started,USD,500,1,TRUE
 mevnt_001a,sub_0001,scus_001,gold_monthly,2024-06-04,2024-06-04,manual_subscription_updated,USD,1000,2,TRUE
 mevnt_001b,sub_0001,scus_001,gold_monthly,2024-07-05,2024-07-05,manual_subscription_updated,USD,1500,3,TRUE

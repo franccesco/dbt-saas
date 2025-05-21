@@ -1,4 +1,4 @@
-Customer external ID,Subscription external ID,External ID,Event Type,Retracted event ID,Date,Effective Date,Plan external ID,Currency,Amount in Cents,Quantity
+customer_external_id,subscription_external_id,external_id,event_type,retracted_event_id,date,effective_date,plan_external_id,currency,amount_in_cents,quantity
 scus_001,sub_0001b,evnt_001,subscription_start,,2025-03-15,2025-03-15,gold_biannual,USD,150000,1
 scus_002,sub_0002,evnt_002,subscription_start_scheduled,,2025-04-28,2025-05-16,gold_monthly,USD,10000,1
 scus_002,sub_0002,evnt_003,subscription_event_retracted,evnt_002,2025-04-29,2025-05-16,gold_monthly,USD,10000,1

@@ -1,4 +1,4 @@
-Invoice external ID,External ID,Type,Result,Date
+invoice_external_id,external_id,type,result,date
 inv_001,trans_0001,payment,successful,2024-05-04
 inv_002,trans_0002,payment,failed,2024-06-04
 inv_002,trans_0003,payment,successful,2024-06-05

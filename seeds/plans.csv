@@ -1,4 +1,4 @@
-Name,Interval count,Interval unit,Plan ID
+name,interval_count,interval_unit,plan_id
 Gold annual,1,year,gold_annual
 Gold monthly,1,month,gold_monthly
 Gold bi-annual,6,month,gold_biannual

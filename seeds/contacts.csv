@@ -1,4 +1,4 @@
-Customer External ID,First name,Last name,Email,Position,Title,Phone,LinkedIn,Twitter,Note
+customer_external_id,first_name,last_name,email,position,title,phone,linkedin,twitter,note
 scus_001,Andrew,Jones,andrew@example.com,,CEO,(888) 555-0001,,,He's nickname is Andy
 scus_002,Bernard,Yolks,bernard@example.com,,Finance Manager,(888) 555-0002,,,Met him at networking night
 scus_003,Charlie,Williams,charlie@example.com,,COO,(888) 555-0003,,,

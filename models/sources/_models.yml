@@ -1,0 +1,193 @@
+version: 2
+
+sources:
+  - name: public
+    description: "Seed data already loaded in the warehouse. Each table is a direct import from a CSV seed file."
+    database: postgres
+    tables:
+      - name: contacts
+        description: "Contact people at customer companies."
+        columns:
+          - name: customer_external_id
+            description: "Unique external identifier for the customer."
+            tests: [unique, not_null]
+          - name: first_name
+            description: "First name of the contact."
+          - name: last_name
+            description: "Last name of the contact."
+          - name: email
+            description: "Email address of the contact."
+          - name: position
+            description: "Position of the contact at the company."
+          - name: title
+            description: "Job title of the contact."
+          - name: phone
+            description: "Phone number of the contact."
+          - name: linkedin
+            description: "LinkedIn profile URL."
+          - name: twitter
+            description: "Twitter handle."
+          - name: note
+            description: "Additional notes about the contact."
+      - name: customers
+        description: "Customer companies and their basic info."
+        columns:
+          - name: external_id
+            description: "Unique external identifier for the customer."
+            tests: [unique, not_null]
+          - name: company
+            description: "Name of the company."
+          - name: country
+            description: "Country where the company is located."
+          - name: state
+            description: "State or province."
+          - name: city
+            description: "City where the company is located."
+          - name: zip
+            description: "Postal code."
+          - name: lead_created_at
+            description: "Date the lead was created."
+          - name: free_trial_started_at
+            description: "Date the free trial started."
+      - name: invoice_line_items
+        description: "Line items for each invoice, including subscriptions, one-time fees, discounts, and taxes."
+        columns:
+          - name: external_id
+            description: "Unique identifier for the line item. May be blank for some rows."
+          - name: invoice_external_id
+            description: "External ID of the invoice this line item belongs to."
+            tests: [not_null]
+          - name: subscription_external_id
+            description: "External ID of the subscription, if applicable."
+          - name: subscription_set_external_id
+            description: "External ID of the subscription set, if applicable."
+          - name: type
+            description: "Type of line item (e.g., Subscription, OneTime)."
+          - name: amount_in_cents
+            description: "Amount for this line item, in cents."
+          - name: plan
+            description: "Plan name or ID, if applicable."
+          - name: service_period_start
+            description: "Start date of the service period."
+          - name: service_period_end
+            description: "End date of the service period."
+          - name: quantity
+            description: "Quantity for this line item."
+          - name: proration
+            description: "Whether this line item is a proration (TRUE/FALSE)."
+          - name: discount_code
+            description: "Discount code applied, if any."
+          - name: discount_amount
+            description: "Discount amount in cents."
+          - name: tax_amount
+            description: "Tax amount in cents."
+          - name: description
+            description: "Description of the line item."
+          - name: transaction_fee
+            description: "Transaction fee in cents."
+          - name: account_code
+            description: "Account code for accounting purposes."
+          - name: transaction_fees_currency
+            description: "Currency for transaction fees."
+          - name: discount_description
+            description: "Description of the discount."
+          - name: event_order
+            description: "Order of the event, if applicable."
+          - name: balance_transfer
+            description: "Indicates if this is a balance transfer."
+          - name: proration_type
+            description: "Type of proration, if applicable."
+      - name: invoices
+        description: "Invoices issued to customers."
+        columns:
+          - name: invoice_external_id
+            description: "Unique external identifier for the invoice."
+            tests: [unique, not_null]
+          - name: customer_external_id
+            description: "External ID of the customer this invoice is for."
+            tests: [not_null]
+          - name: invoiced_date
+            description: "Date the invoice was issued."
+          - name: due_date
+            description: "Date the invoice is due."
+          - name: currency
+            description: "Currency of the invoice."
+      - name: manual_subscriptions
+        description: "Manual subscription events, such as starts, updates, and cancellations."
+        columns:
+          - name: external_id
+            description: "Unique external identifier for the manual subscription event."
+            tests: [unique, not_null]
+          - name: subscription_external_id
+            description: "External ID of the subscription."
+          - name: customer_external_id
+            description: "External ID of the customer."
+          - name: plan_external_id
+            description: "External ID of the plan."
+          - name: date
+            description: "Date of the event."
+          - name: effective_date
+            description: "Date the event takes effect."
+          - name: event_type
+            description: "Type of manual subscription event."
+          - name: currency
+            description: "Currency for the event."
+          - name: amount_in_cents
+            description: "Amount in cents for the event."
+          - name: quantity
+            description: "Quantity for the event."
+          - name: report_cash_flow
+            description: "Whether to report cash flow (TRUE/FALSE)."
+      - name: plans
+        description: "Available subscription plans."
+        columns:
+          - name: plan_id
+            description: "Unique identifier for the plan."
+            tests: [unique, not_null]
+          - name: name
+            description: "Name of the plan."
+          - name: interval_count
+            description: "Number of intervals for the plan."
+          - name: interval_unit
+            description: "Unit of interval (e.g., month, year)."
+      - name: subscription_events
+        description: "Events related to subscriptions, including starts, updates, cancellations, and retractions."
+        columns:
+          - name: external_id
+            description: "Unique external identifier for the subscription event."
+            tests: [unique, not_null]
+          - name: customer_external_id
+            description: "External ID of the customer."
+          - name: subscription_external_id
+            description: "External ID of the subscription."
+          - name: event_type
+            description: "Type of subscription event."
+          - name: retracted_event_id
+            description: "ID of the event that was retracted, if applicable."
+          - name: date
+            description: "Date of the event."
+          - name: effective_date
+            description: "Date the event takes effect."
+          - name: plan_external_id
+            description: "External ID of the plan."
+          - name: currency
+            description: "Currency for the event."
+          - name: amount_in_cents
+            description: "Amount in cents for the event."
+          - name: quantity
+            description: "Quantity for the event."
+      - name: transactions
+        description: "Payment and refund transactions for invoices."
+        columns:
+          - name: external_id
+            description: "Unique external identifier for the transaction."
+            tests: [unique, not_null]
+          - name: invoice_external_id
+            description: "External ID of the invoice this transaction is related to."
+            tests: [not_null]
+          - name: type
+            description: "Type of transaction (e.g., payment, refund)."
+          - name: result
+            description: "Result of the transaction (e.g., successful, failed)."
+          - name: date
+            description: "Date of the transaction."
