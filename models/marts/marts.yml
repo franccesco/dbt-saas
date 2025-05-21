@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Dimension table for customers with basic attributes and analytics features.
+    columns:
+      - name: customer_id
+        description: Primary key for customers.
+        tests:
+          - not_null
+          - unique
+      - name: days_to_free_trial
+        description: Days between lead creation and start of free trial.
+
+  - name: dim_plans
+    description: Dimension table for subscription plans.
+    columns:
+      - name: plan_id
+        description: Primary key for plans.
+        tests:
+          - not_null
+          - unique
+      - name: plan_interval
+        description: Concatenated interval count and unit.
+
+  - name: fct_invoices
+    description: Fact table summarizing invoice information and totals.
+    columns:
+      - name: invoice_id
+        description: Primary key for invoices.
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Foreign key to dim_customers.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      - name: days_until_due
+        description: Difference between due_date and invoiced_date.
+
+  - name: fct_invoice_line_items
+    description: Fact table of invoice line items with net amount calculation.
+    columns:
+      - name: line_item_id
+        description: Identifier of the line item if present.
+      - name: invoice_id
+        description: Foreign key to fct_invoices.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_invoices')
+              field: invoice_id
+
+  - name: fct_manual_subscriptions
+    description: Manual subscription events.
+    columns:
+      - name: manual_subscription_event_id
+        description: Primary key for manual subscription events.
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_subscription_events
+    description: Subscription events.
+    columns:
+      - name: subscription_event_id
+        description: Primary key for subscription events.
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_transactions
+    description: Transactions for invoices.
+    columns:
+      - name: transaction_id
+        description: Primary key for transactions.
+        tests:
+          - not_null
+          - unique
+      - name: invoice_id
+        description: Foreign key to fct_invoices.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_invoices')
+              field: invoice_id
+
