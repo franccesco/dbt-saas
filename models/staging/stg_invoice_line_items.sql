@@ -21,4 +21,4 @@ select
     event_order,
     balance_transfer,
     proration_type
-from {{ source('public', 'invoice_line_items') }}
+from {{ source("public", "invoice_line_items") }}

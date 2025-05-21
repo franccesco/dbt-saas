@@ -7,4 +7,4 @@ select
     zip,
     lead_created_at,
     free_trial_started_at
-from {{ source('public', 'customers') }}
+from {{ source("public", "customers") }}

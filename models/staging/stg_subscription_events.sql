@@ -10,4 +10,4 @@ select
     currency,
     amount_in_cents,
     quantity
-from {{ source('public', 'subscription_events') }}
+from {{ source("public", "subscription_events") }}

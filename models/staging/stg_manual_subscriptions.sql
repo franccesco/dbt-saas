@@ -10,4 +10,4 @@ select
     amount_in_cents,
     quantity,
     report_cash_flow
-from {{ source('public', 'manual_subscriptions') }}
+from {{ source("public", "manual_subscriptions") }}

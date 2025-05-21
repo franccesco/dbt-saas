@@ -4,4 +4,4 @@ select
     type as transaction_type,
     result as transaction_result,
     date as transaction_date
-from {{ source('public', 'transactions') }}
+from {{ source("public", "transactions") }}

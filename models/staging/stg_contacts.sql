@@ -9,4 +9,4 @@ select
     linkedin,
     twitter,
     note
-from {{ source('public', 'contacts') }}
+from {{ source("public", "contacts") }}
