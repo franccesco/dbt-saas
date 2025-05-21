@@ -5,3 +5,4 @@
 - Make sure your models run without errors. You can use `uv run dbt run` to run the models and `uv run dbt test` to test the models. Alternatively, you can use `uv run dbt build` to run the models and tests.
 - Run `uv run sqlfmt models/` to make sure all SQL and YML files are formatted correctly before committing.
 - `uv` creates a local virtual environment under `.venv`. Avoid it when searching for files or when formatting them.
+- Always document and test your models or update the current documentation when applicable.
