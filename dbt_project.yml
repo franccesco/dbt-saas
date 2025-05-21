@@ -33,7 +33,7 @@ models:
   dbt_saas:
     staging:
       schema: stg_dbt
-      +materialized: view
+      +materialized: table
     marts:
       schema: mart_dbt
       +materialized: table
