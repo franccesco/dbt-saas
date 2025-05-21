@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: stg_contacts
+    description: Staged contact data from source
+    columns:
+      - name: customer_external_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_external_id
+
+  - name: stg_customers
+    description: Staged customer data from source
+    columns:
+      - name: customer_external_id
+        description: Primary key for customers
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_invoice_line_items
+    description: Staged invoice line items from source
+    columns:
+      - name: invoice_external_id
+        description: Foreign key to invoices
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_invoices')
+              field: invoice_external_id
+
+  - name: stg_invoices
+    description: Staged invoice data from source
+    columns:
+      - name: invoice_external_id
+        description: Primary key for invoices
+        tests:
+          - unique
+          - not_null
+      - name: customer_external_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_external_id
+
+  - name: stg_manual_subscriptions
+    description: Staged manual subscription events from source
+    columns:
+      - name: external_id
+        description: Primary key for manual subscription events
+        tests:
+          - unique
+          - not_null
+      - name: customer_external_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_external_id
+      - name: plan_external_id
+        description: Foreign key to plans
+        tests:
+          - relationships:
+              to: ref('stg_plans')
+              field: plan_external_id
+
+  - name: stg_plans
+    description: Staged subscription plans from source
+    columns:
+      - name: plan_external_id
+        description: Primary key for plans
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_subscription_events
+    description: Staged subscription events from source
+    columns:
+      - name: external_id
+        description: Primary key for subscription events
+        tests:
+          - unique
+          - not_null
+      - name: customer_external_id
+        description: Foreign key to customers
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_external_id
+      - name: plan_external_id
+        description: Foreign key to plans
+        tests:
+          - relationships:
+              to: ref('stg_plans')
+              field: plan_external_id
+
+  - name: stg_transactions
+    description: Staged transaction data from source
+    columns:
+      - name: transaction_external_id
+        description: Primary key for transactions
+        tests:
+          - unique
+          - not_null
+      - name: invoice_external_id
+        description: Foreign key to invoices
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_invoices')
+              field: invoice_external_id
