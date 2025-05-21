@@ -3,6 +3,6 @@ select
     invoice_external_id as invoice_id,
     transaction_type,
     transaction_result,
-    transaction_date,
-    (transaction_result = 'successful')::boolean as was_successful
+    (transaction_result = 'successful')::boolean as was_successful,
+    transaction_date
 from {{ ref("stg_transactions") }}
