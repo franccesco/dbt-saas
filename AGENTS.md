@@ -1,6 +1,7 @@
-- Seeds are stored in the `seeds` directory which are then used to create the tables in the `public` schema. You understand the relationship between the seeds by looking at the `seeds-erd.md` file.
+- Seeds are stored in the `seeds` directory which are then used to create the tables in the `public` schema. You understand the relationship between the seeds by looking at the `seeds-relationships.md` file.
 - Models such as staging and marts are stored in the `models` directory.
 - This repo is loaded with pre-commit hooks to ensure code quality. Please refer to the `.pre-commit-config.yaml` file for more information.
 - `uv` is used as a package manager. You need to append `uv run` in front of your commands to execute them such as `uv run dbt parse` to parse the models.
+- Make sure your models run without errors. You can use `uv run dbt run` to run the models and `uv run dbt test` to test the models. Alternatively, you can use `uv run dbt build` to run the models and tests.
 - Run `uv run sqlfmt models/` to make sure all SQL and YML files are formatted correctly before committing.
-- `uv` creates a local virtual environment under `.venv`. Avoid it when searching for files.
+- `uv` creates a local virtual environment under `.venv`. Avoid it when searching for files or when formatting them.
