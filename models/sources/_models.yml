@@ -7,10 +7,22 @@ sources:
     tables:
       - name: contacts
         description: "Contact people at customer companies."
+        constraints:
+          - type: not_null
+            columns: [customer_external_id]
+          - type: foreign_key
+            columns: [customer_external_id]
+            to: source('public', 'customers')
+            to_columns: [external_id]
         columns:
           - name: customer_external_id
             description: "Unique external identifier for the customer."
-            tests: [unique, not_null]
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                  to: source('public', 'customers')
+                  field: external_id
           - name: first_name
             description: "First name of the contact."
           - name: last_name
@@ -31,6 +43,9 @@ sources:
             description: "Additional notes about the contact."
       - name: customers
         description: "Customer companies and their basic info."
+        constraints:
+          - type: primary_key
+            columns: [external_id]
         columns:
           - name: external_id
             description: "Unique external identifier for the customer."
@@ -51,12 +66,23 @@ sources:
             description: "Date the free trial started."
       - name: invoice_line_items
         description: "Line items for each invoice, including subscriptions, one-time fees, discounts, and taxes."
+        constraints:
+          - type: not_null
+            columns: [invoice_external_id]
+          - type: foreign_key
+            columns: [invoice_external_id]
+            to: source('public', 'invoices')
+            to_columns: [invoice_external_id]
         columns:
           - name: external_id
             description: "Unique identifier for the line item. May be blank for some rows."
           - name: invoice_external_id
             description: "External ID of the invoice this line item belongs to."
-            tests: [not_null]
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'invoices')
+                  field: invoice_external_id
           - name: subscription_external_id
             description: "External ID of the subscription, if applicable."
           - name: subscription_set_external_id
@@ -99,13 +125,26 @@ sources:
             description: "Type of proration, if applicable."
       - name: invoices
         description: "Invoices issued to customers."
+        constraints:
+          - type: primary_key
+            columns: [invoice_external_id]
+          - type: not_null
+            columns: [customer_external_id]
+          - type: foreign_key
+            columns: [customer_external_id]
+            to: source('public', 'customers')
+            to_columns: [external_id]
         columns:
           - name: invoice_external_id
             description: "Unique external identifier for the invoice."
             tests: [unique, not_null]
           - name: customer_external_id
             description: "External ID of the customer this invoice is for."
-            tests: [not_null]
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'customers')
+                  field: external_id
           - name: invoiced_date
             description: "Date the invoice was issued."
           - name: due_date
@@ -114,6 +153,21 @@ sources:
             description: "Currency of the invoice."
       - name: manual_subscriptions
         description: "Manual subscription events, such as starts, updates, and cancellations."
+        constraints:
+          - type: primary_key
+            columns: [external_id]
+          - type: not_null
+            columns: [customer_external_id]
+          - type: foreign_key
+            columns: [customer_external_id]
+            to: source('public', 'customers')
+            to_columns: [external_id]
+          - type: not_null
+            columns: [plan_external_id]
+          - type: foreign_key
+            columns: [plan_external_id]
+            to: source('public', 'plans')
+            to_columns: [plan_id]
         columns:
           - name: external_id
             description: "Unique external identifier for the manual subscription event."
@@ -122,8 +176,17 @@ sources:
             description: "External ID of the subscription."
           - name: customer_external_id
             description: "External ID of the customer."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'customers')
+                  field: external_id
           - name: plan_external_id
             description: "External ID of the plan."
+            tests:
+              - relationships:
+                  to: source('public', 'plans')
+                  field: plan_id
           - name: date
             description: "Date of the event."
           - name: effective_date
@@ -140,6 +203,9 @@ sources:
             description: "Whether to report cash flow (TRUE/FALSE)."
       - name: plans
         description: "Available subscription plans."
+        constraints:
+          - type: primary_key
+            columns: [plan_id]
         columns:
           - name: plan_id
             description: "Unique identifier for the plan."
@@ -152,12 +218,32 @@ sources:
             description: "Unit of interval (e.g., month, year)."
       - name: subscription_events
         description: "Events related to subscriptions, including starts, updates, cancellations, and retractions."
+        constraints:
+          - type: primary_key
+            columns: [external_id]
+          - type: not_null
+            columns: [customer_external_id]
+          - type: foreign_key
+            columns: [customer_external_id]
+            to: source('public', 'customers')
+            to_columns: [external_id]
+          - type: not_null
+            columns: [plan_external_id]
+          - type: foreign_key
+            columns: [plan_external_id]
+            to: source('public', 'plans')
+            to_columns: [plan_id]
         columns:
           - name: external_id
             description: "Unique external identifier for the subscription event."
             tests: [unique, not_null]
           - name: customer_external_id
             description: "External ID of the customer."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'customers')
+                  field: external_id
           - name: subscription_external_id
             description: "External ID of the subscription."
           - name: event_type
@@ -170,6 +256,10 @@ sources:
             description: "Date the event takes effect."
           - name: plan_external_id
             description: "External ID of the plan."
+            tests:
+              - relationships:
+                  to: source('public', 'plans')
+                  field: plan_id
           - name: currency
             description: "Currency for the event."
           - name: amount_in_cents
@@ -178,13 +268,26 @@ sources:
             description: "Quantity for the event."
       - name: transactions
         description: "Payment and refund transactions for invoices."
+        constraints:
+          - type: primary_key
+            columns: [external_id]
+          - type: not_null
+            columns: [invoice_external_id]
+          - type: foreign_key
+            columns: [invoice_external_id]
+            to: source('public', 'invoices')
+            to_columns: [invoice_external_id]
         columns:
           - name: external_id
             description: "Unique external identifier for the transaction."
             tests: [unique, not_null]
           - name: invoice_external_id
             description: "External ID of the invoice this transaction is related to."
-            tests: [not_null]
+            tests:
+              - not_null
+              - relationships:
+                  to: source('public', 'invoices')
+                  field: invoice_external_id
           - name: type
             description: "Type of transaction (e.g., payment, refund)."
           - name: result
