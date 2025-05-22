@@ -37,3 +37,6 @@ models:
     marts:
       schema: mart_dbt
       +materialized: table
+    analysis:
+      schema: analysis_dbt
+      +materialized: table

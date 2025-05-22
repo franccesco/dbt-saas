@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: analysis_monthly_revenue
+    description: Monthly revenue metrics calculated from invoice line items.
+    columns:
+      - name: month
+        description: First day of the month for the metric.
+        tests:
+          - not_null
+      - name: recurring_revenue_cents
+        description: Sum of net subscription revenue in the month.
+      - name: onetime_revenue_cents
+        description: Sum of net non-subscription revenue in the month.
+      - name: total_revenue_cents
+        description: Total net revenue in the month.
+
+  - name: analysis_subscription_churn
+    description: Monthly count of manual subscription starts and cancellations.
+    columns:
+      - name: month
+        description: First day of the month for the events.
+        tests:
+          - not_null
+      - name: subscription_starts
+        description: Number of manual subscription start events.
+      - name: subscription_cancellations
+        description: Number of manual subscription cancellation events.
+      - name: net_subscriptions
+        description: Difference between starts and cancellations for the month.
